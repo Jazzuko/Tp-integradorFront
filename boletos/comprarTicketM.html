@@ -7,6 +7,7 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/inteBoot.css">
 
 
 </head>
@@ -14,6 +15,7 @@
 <body>
     <!-- menu -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        
         <div class="container-fluid">
             <a class="navbar-brand " href="#">
                 <img src="img/codoacodo.png" alt="" class="w-25">
@@ -29,14 +31,23 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
                         <li class="nav-item">
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">La Conferencia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Lo Oradores</a>
+                            <a class="nav-link" href="#">Los Oradores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Lugar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Fecha</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Conviertete en orador</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-success" href="#">Comprar Ticket</a>
@@ -46,11 +57,56 @@
             </div>
         </div>
     </nav>
+    <div class="text-center mb-2" >
+        <div class="">COMPRA TUS</div>
+        <div class="fs-4 fw-blod">TICKETS</div>
+    </div>
+    <!--Cards-->
+    <div class="d-flex flex-wrap justify-content-center m-2 gap-3">
+        <div class="">
+            <div class="card" style="width:18rem;" onclick="selticket ('Student')">
+                <div class="card-body">
+                    <div class="">
+                        <span class="badge bg-danger text-white">80% off</span>
+                    </div>
+                    <p class="fs-5 fw-blod">Student</p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor laudantium, expedita omnis tempora nostrum pariatur, fuga quo aperiam iste dignissimos laborum at beatae quasi fugiat ut in libero optio.</p>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="card" style="width:18rem;" onclick="selticket('Trainee')">
+                <div class="card-body">
+                    <div class="">
+                        <span class="badge bg-warning text-dark">50% off</span>
+                    </div>
+                    <p class="fs-5 fw-blod">Trainee</p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor laudantium, expedita omnis tempora nostrum pariatur, fuga quo aperiam iste dignissimos laborum at beatae quasi fugiat ut in libero optio.</p>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="card" style="width:18rem;" onclick="selticket('Junior')">
+                <div class="card-body">
+                    <div class=" ">
+                        <span class="badge bg-info text-white">15% off</span>
+                    </div>
+                    <p class="fs-5 fw-blod">Junior</p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi dolor laudantium, expedita omnis tempora nostrum pariatur, fuga quo aperiam iste dignissimos laborum at beatae quasi fugiat ut in libero optio.</p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="text-center mb-2">
+        <div class="">COMPLETA TUS</div>
+        <div class="fs-4 fw-blod">DATOS</div>
+    </div>
     
     <!-- formulario comprar ticket -->
     <div class="container my-3">
         <form action="../servidor/procesarCompTicket.html" method="post" class="needs-validation" novalidate>
-           <!--<div class="row">
+           <div class="row">
                 <div class="col-md mb-3">
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" required>
                     <div class="invalid-feedback">
@@ -63,7 +119,13 @@
                         Debe ingresar su apellido
                     </div>                    
                 </div>
-            </div>--> 
+                <div class="col-md mb-3">
+                    <input type="text" name="email" id="email" placeholder="Email" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Ingrese su Email
+                    </div>                    
+                </div>
+            </div>
             <div class="row mb-3">
                 <div class="col-md mb-3">
                     <input type="number" name="cant" id="cant" onchange="calcTotal()" onkeyup="calcTotal()" placeholder="Cantidad Tickets" class="form-control" required>
@@ -75,13 +137,14 @@
                         Valor Ticket $1000
                     </div>
                 </div>    
-                <!--<div class="col-md mb-3">
-                    <select class="form-select" id="desc" onchange="calcTotal()">
-                        <option value="50">Estudiante 50%</option>
-                        <option value="30">Profesional 30%</option>
-                        <option value="10">Orador 10%</option>
+                <div class="col-md mb-3">
+                    <select class="form-select" id="category" onchange="" >
+                        <option value="80">Student 80%</option>
+                        <option value="50">Traine 50%</option>
+                        <option value="15">Junior 15%</option>
                     </select>
-                </div>-->
+                    <p id="resultado"></p>
+                </div>
             </div>
             <div class="row bg-danger mb-3">
                 <div class="col mb-3 ">
@@ -89,9 +152,12 @@
                 </div>
 
             </div>
-            <div class="row mb-3">
-                <input type="submit" value="Comprar" class="btn btn-primary">
+            <div class="mb-3 d-flex justify-content-center gap-3">
+                <button onclick="Borrar()" class="btn btn-success w-25">Borrar</button>
+                <button onclick="calcularDescuento()" class="btn btn-success w-25">Resumen</button>
+                
             </div>
+
 
 
         </form>
@@ -118,7 +184,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <script src="js/scrip.js"></script>
+    <script src="js/scripM.js"></script>
 </body>
 
 </html>
+<!---->
